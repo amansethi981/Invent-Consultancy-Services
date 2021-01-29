@@ -1,20 +1,32 @@
 import React from "react"
-import { BrowserRouter, Switch, Route } from "react-router-dom";
-import Todo from "./components/Todo"
-import Edit from "./components/Edit"
-import Home from "./pages/HomePage"
-import GetData from "./components/Getalltodo"
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch
+} from 'react-router-dom'
+import Todo from "./Components/Todo"
+import ChildTodo from "./ChildComponents/Child"
+import TodosForm from "./Components/TodosForm"
+import Edit from "./Components/Updated"
 const Routes=()=>{
-    return (
-        <BrowserRouter>
+  return(
+      <Router>
         <Switch>
-        {/* <Route path="/clients/edit" exact component={Edit} /> */}
-        <Route path='/' exact component={Home} />
-        <Route path="/childlist" exact component={Todo} />
-        <Route path="/edit" exact component={Edit} />
-        <Route path="/getalltodo" exact component={GetData} />
+        <Route path='/home' exact >
+          <TodosForm />
+        </Route>
+        <Route path='/todo' exact>
+          <Todo />
+        </Route>
+        <Route path='/todo/:todoId'>
+          <Edit />
+        </Route>
+        <Route path='/todos/view/:todoId' exact>
+          <ChildTodo />
+        </Route>
         </Switch>
-        </BrowserRouter>
-    )
+      </Router>
+  )
 }
-export default Routes
+
+export default Routes;

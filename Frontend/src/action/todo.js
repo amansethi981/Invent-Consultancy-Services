@@ -1,4 +1,4 @@
-import { ADD_TODO, REMOVE_TODO,AddTodo } from "./action-types";
+import { ADD_TODO, REMOVE_TODO,AddTodo } from "./action-type";
 
 export const addTodo = (todo) => ({
   type: ADD_TODO,
@@ -9,4 +9,3 @@ export const removeTodo = (id) => ({
   type: REMOVE_TODO,
   payload: id,
 });
-

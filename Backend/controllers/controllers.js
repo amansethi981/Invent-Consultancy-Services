@@ -1,25 +1,13 @@
 const NewTodo=require("../models/models")
 
-exports.getTodoById=(req,res,id,next)=>{
-  console.log(id);
-    NewTodo.findById(id)
-    .exec((err,todo)=>{
-        if (err) {
-            return res.status(400).json({
-              errors: "No Todo found",
-            });
-          }
-          req.NewTodo=todo;
-          next();
-    })
-}
+
 exports.createTodo = async (req, res) => {
-  const { title} = req.body;
- // console.log(req.body);
+  const { title,description} = req.body;
+  console.log(req.body);
   try {
-    let newtodo = new NewTodo({ title});
+    let newtodo = new NewTodo({ title,description});
     let article = await newtodo.save();
-    // console.log(article);
+     console.log(article);
     return res.status(200).json({
       msg: "Created Todo",
       data: newtodo,
@@ -43,22 +31,57 @@ exports.getAllTodo = (req, res) => {
       res.json(todo);
     });
 };
-  
-exports.removetodo = (req, res) => {
-  const newtodo=req.NewTodo;
-  console.log(newtodo);
-    newtodo.remove((err, todo) => {
-      if (err) {
-        return res.status(400).json({
-          error: "Failed to delete this todo"
-        });
-      }
-      res.json({
-        message: "Successfull deleted"
-      });
-    });
-  };
- exports.getTodo = (req, res) => {
-      console.log(req.body);
-    return res.json(req.body);
-  };
+
+exports. getTodoByID=async (req,res)=>{
+const TodoId=req.params.todoId;
+let todo;
+try{
+  todo=await NewTodo.findById(TodoId);
+  console.log(todo)
+}
+catch(err){
+  console.log(err)
+}
+res.json(todo)
+}
+
+exports.updatetodo=async(req,res)=>{
+  const {title}=req.body;
+  console.log(req.body);
+  const todoId=req.params.todoId;
+  console.log(todoId)
+  let todo;
+  try {
+    todo=await NewTodo.findById(todoId);
+  } catch (error) {
+    console.log(error)
+  }
+  todo.title=title;
+  try {
+    await todo.save();
+  } catch (error) {
+    console.log(error)
+  }
+  res.status(200).json(todo)
+}
+
+
+exports.removetodo =async(req,res)=>{
+  const todoId=req.params.todoId;
+  console.log(todoId)
+  let todo;
+  try {
+    todo=await NewTodo.findById(todoId)
+  } catch (error) {
+    console.log(error)
+  }
+  try {
+    await NewTodo.deleteOne({_id:todoId})
+  } catch (error) {
+    console.log(error)
+  }
+  res.json({
+    message: "Successfull deleted"
+  });
+}
+

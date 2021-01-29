@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import {
   FormGroup,
   FormControl,
@@ -90,7 +89,7 @@ const TodoForm = ({ addTodo }) => {
 
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} style={{marginTop:"12rem",width:"30rem",marginLeft:"25rem"}}>
       <FormGroup>
         <FormControl>
           <InputLabel htmlFor="standard-adornment-amount">
