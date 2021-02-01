@@ -41,6 +41,14 @@ const Todoitem=(props)=>{
                      View
           </Button>
           </Link>
+          
+
+          <Link to={`/todo/child/${props.id}`}>
+          <Button variant="contained" color="primary" style={{marginLeft:"2rem"}}>
+                     CreateChild
+          </Button>
+          
+          </Link>
           <Link to={`/todo/${props.id}`}>
           <Button variant="contained" color="primary" style={{marginLeft:"2rem"}}>
                      Edit

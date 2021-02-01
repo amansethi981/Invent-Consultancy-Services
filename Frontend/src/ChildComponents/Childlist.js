@@ -2,6 +2,7 @@ import React from "react"
 import Todoitem from "./Childitem"
 import Cards from "../common/Cards"
 const Todolist=(props)=>{
+  console.log(props);
     if (props.items.length === 0) {
         return (
           <div className="center">
@@ -13,10 +14,11 @@ const Todolist=(props)=>{
       }
    return(
     <ul style={{marginTop:"2rem"}}>
-    {props.items.map(todo=>(
+    {props.items[0].children.map(todo=>(
         <Todoitem 
+        mainid={props.items[0]._id}
         id={todo._id}
-        title={todo.title}
+        title={todo.name}
         />
     ))}
 </ul>
